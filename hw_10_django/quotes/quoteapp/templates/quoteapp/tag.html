@@ -1,0 +1,7 @@
+{% extends "quoteapp/index.html" %}
+
+{% block content_tag %}
+
+<h3>Viewing tag: <a href="{% url 'quoteapp:about_tag' name=tag.name %}">{{tag.name}}</a></h3>
+
+{% endblock content_tag %}

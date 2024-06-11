@@ -1,0 +1,68 @@
+{% extends "quoteapp/base.html" %}
+
+{% block content %}
+
+{% block content_tag %} {% endblock %}
+
+<div class="quotes-box">
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            {% for quote in quotes %}
+
+                <div class="quote" itemscope itemtype="http://schema.org/CreativeWork">
+                    <span class="text" itemprop="text">{{quote.quote}}</span>
+                    <span>by <small class="author" itemprop="author">{{quote.author.fullname}}</small>
+                    <a class="about" href="{% url 'quoteapp:about_author' fullname=quote.author.fullname %}">(about)</a>
+                    </span>
+                    <div class="tags">
+                        Tags:
+                        {%for tag in quote.tags.all %}                
+                            <a class="tag" href="{% url 'quoteapp:about_tag' name=tag.name %}">{{tag.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            <nav>
+                <ul class="pager">
+
+                    <li class="previous">
+                        <a class="{% if not quotes.has_previous %} disabled {% endif %}" 
+                        href="{% if quotes.has_previous %} {% url 'quoteapp:root_paginate' page=quotes.previous_page_number %} {% else %} # {% endif %}">
+                        <span aria-hidden="true">←</span> 
+                        Previous</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a class="{% if not quotes.has_next %} disabled {% endif %}" 
+                        href="{% if quotes.has_next %} {% url 'quoteapp:root_paginate' page=quotes.next_page_number %} {% else %} # {% endif %}">
+                        Next 
+                        <span aria-hidden="true">→</span></a>
+                    </li>
+                    
+                </ul>
+            </nav>
+
+        </div>
+
+        <div class="col-md-4 tags-box">
+            
+            <h2>Top Ten tags</h2>
+                {% for tag in top_tags %}
+                    <span class="tag-item">
+                        <a class="tag" style="font-size: 24px" href="{% url 'quoteapp:about_tag' tag.name %}">{{ tag.name }}</a>
+                    </span>
+                {% endfor %}
+        
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock content %}

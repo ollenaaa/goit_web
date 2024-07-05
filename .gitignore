@@ -3,3 +3,5 @@
 venv
 **/__pycache__/
 hw_10_django/quotes/.env
+hw_13_backend/django/quotes/.env
+hw_13_backend/fastapi/.env

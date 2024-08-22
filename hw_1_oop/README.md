@@ -1,0 +1,1 @@
+![UML діаграма](https://github.com/ollenaaa/python_web/blob/master/uml.png)
